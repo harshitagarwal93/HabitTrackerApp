@@ -20,6 +20,10 @@ export const api = {
   getAuthInfo: () =>
     request<AuthInfo>('/.auth/me'),
 
+  // Combined init call — fetches items + stats in a single round trip
+  init: () =>
+    request<{ items: PlanItem[]; stats: UserStats }>('/api/init'),
+
   getPlanItems: (trackId?: TrackId) => {
     const params = trackId ? `?trackId=${trackId}` : '';
     return request<PlanItem[]>(`/api/plan-items${params}`);

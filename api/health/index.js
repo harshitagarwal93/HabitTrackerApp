@@ -1,3 +1,5 @@
+const { getClient } = require("../shared/cosmos");
+
 module.exports = async function (context, req) {
   const hasCS = !!process.env.COSMOS_CONNECTION_STRING;
   let cosmosOk = false;
@@ -5,8 +7,7 @@ module.exports = async function (context, req) {
 
   if (hasCS) {
     try {
-      const { CosmosClient } = require("@azure/cosmos");
-      const client = new CosmosClient(process.env.COSMOS_CONNECTION_STRING);
+      const client = getClient();
       const { resource } = await client.database("PrepTracker").read();
       cosmosOk = !!resource;
     } catch (err) {

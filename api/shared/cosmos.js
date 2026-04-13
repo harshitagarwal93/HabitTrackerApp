@@ -1,28 +1,21 @@
 const { CosmosClient } = require("@azure/cosmos");
 
-let client = null;
-let database = null;
+// Eagerly initialize on module load to avoid cold-start penalty on first request
+const cs = process.env.COSMOS_CONNECTION_STRING;
+const client = cs ? new CosmosClient(cs) : null;
+const database = client ? client.database("PrepTracker") : null;
 
 function getClient() {
-  if (!client) {
-    const cs = process.env.COSMOS_CONNECTION_STRING;
-    if (!cs) throw new Error("COSMOS_CONNECTION_STRING not set");
-    client = new CosmosClient(cs);
-  }
+  if (!client) throw new Error("COSMOS_CONNECTION_STRING not set");
   return client;
 }
 
-function getDatabase() {
-  if (!database) database = getClient().database("PrepTracker");
-  return database;
-}
-
 function getPlanItemsContainer() {
-  return getDatabase().container("planItems");
+  return database.container("planItems");
 }
 
 function getUserStatsContainer() {
-  return getDatabase().container("userStats");
+  return database.container("userStats");
 }
 
 async function ensureDatabase() {
@@ -46,4 +39,4 @@ function getAuthUser(req) {
   }
 }
 
-module.exports = { getPlanItemsContainer, getUserStatsContainer, ensureDatabase, getAuthUser };
+module.exports = { getClient, getPlanItemsContainer, getUserStatsContainer, ensureDatabase, getAuthUser };
