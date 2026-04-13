@@ -18,7 +18,7 @@ module.exports = async function (context, req) {
       query += " AND c.trackId = @trackId";
       parameters.push({ name: "@trackId", value: trackId });
     }
-    query += " ORDER BY c.[\"order\"]";
+    query += ' ORDER BY c["order"]';
 
     const { resources } = await container.items.query({ query, parameters }).fetchAll();
 
