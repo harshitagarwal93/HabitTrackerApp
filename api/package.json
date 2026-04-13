@@ -2,19 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "private": true,
-  "main": "dist/functions/*.js",
-  "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "prestart": "npm run build",
-    "start": "func start"
-  },
   "dependencies": {
-    "@azure/cosmos": "^4.2.0",
-    "@azure/functions": "^4.6.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.0.0",
-    "typescript": "~5.7.0"
+    "@azure/cosmos": "^4.2.0"
   }
 }
