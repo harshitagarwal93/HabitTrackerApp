@@ -1,5 +1,5 @@
 export type Status = 'not-started' | 'in-progress' | 'completed';
-export type TrackId = 'azure' | 'cp';
+export type TrackId = 'azure' | 'cp' | 'csharp';
 export type PlanItemType = 'track' | 'phase' | 'topic';
 export type ResourceType = 'book' | 'docs' | 'video' | 'blog' | 'platform' | 'github';
 

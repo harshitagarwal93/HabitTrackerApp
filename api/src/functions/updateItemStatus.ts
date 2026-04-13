@@ -1,8 +1,8 @@
 import { app, type HttpRequest, type HttpResponseInit, type InvocationContext } from '@azure/functions';
-import { getPlanItemsContainer } from '../services/cosmosClient.js';
-import { getAuthUser } from '../middleware/auth.js';
-import { recalculateStats, getOrCreateStats, checkBadges } from '../services/statsService.js';
-import type { PlanItem, Status } from '../types/plan.js';
+import { getPlanItemsContainer } from '../services/cosmosClient';
+import { getAuthUser } from '../middleware/auth';
+import { recalculateStats, getOrCreateStats, checkBadges } from '../services/statsService';
+import type { PlanItem, Status } from '../types/plan';
 
 const VALID_STATUSES: Status[] = ['not-started', 'in-progress', 'completed'];
 

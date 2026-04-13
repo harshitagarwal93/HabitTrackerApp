@@ -1,8 +1,8 @@
 import { app, type HttpRequest, type HttpResponseInit, type InvocationContext } from '@azure/functions';
-import { getPlanItemsContainer, ensureDatabase } from '../services/cosmosClient.js';
-import { getOrCreateStats } from '../services/statsService.js';
-import { getAuthUser } from '../middleware/auth.js';
-import type { PlanItem } from '../types/plan.js';
+import { getPlanItemsContainer, ensureDatabase } from '../services/cosmosClient';
+import { getOrCreateStats } from '../services/statsService';
+import { getAuthUser } from '../middleware/auth';
+import type { PlanItem } from '../types/plan';
 
 async function seedPlan(req: HttpRequest, _context: InvocationContext): Promise<HttpResponseInit> {
   const user = getAuthUser(req);

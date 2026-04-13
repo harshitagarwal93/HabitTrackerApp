@@ -17,11 +17,13 @@ interface TrackCardProps {
 const trackIcons: Record<TrackId, string> = {
   azure: '☁️',
   cp: '🧮',
+  csharp: '💜',
 };
 
 const trackColors: Record<TrackId, string> = {
   azure: 'text-blue-400',
   cp: 'text-emerald-400',
+  csharp: 'text-purple-400',
 };
 
 export function TrackCard({ trackId, title, stats, currentPhase, onContinue, delay = 0, className }: TrackCardProps) {

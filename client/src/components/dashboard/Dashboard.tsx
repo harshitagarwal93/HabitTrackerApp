@@ -4,7 +4,7 @@ import { StreakCounter } from './StreakCounter';
 import { TrackCard } from './TrackCard';
 import { WeeklyHeatmap } from './WeeklyHeatmap';
 import { BadgeShowcase } from './BadgeShowcase';
-import type { UserStats, PlanItem } from '@/types/plan';
+import type { UserStats, PlanItem, TrackId } from '@/types/plan';
 
 interface DashboardProps {
   stats: UserStats | null;
@@ -19,7 +19,7 @@ function getGreeting(): string {
   return 'Good evening';
 }
 
-function getCurrentPhase(items: PlanItem[], trackId: 'azure' | 'cp'): string | undefined {
+function getCurrentPhase(items: PlanItem[], trackId: TrackId): string | undefined {
   const phases = items
     .filter(i => i.trackId === trackId && i.type === 'phase')
     .sort((a, b) => a.order - b.order);
@@ -53,7 +53,7 @@ export function Dashboard({ stats, items, loading }: DashboardProps) {
     totalCompleted: 0,
     badges: [],
     weeklyActivity: {},
-    trackStats: { azure: { completed: 0, total: 0 }, cp: { completed: 0, total: 0 } },
+    trackStats: { azure: { completed: 0, total: 0 }, cp: { completed: 0, total: 0 }, csharp: { completed: 0, total: 0 } },
   };
 
   return (
@@ -62,7 +62,7 @@ export function Dashboard({ stats, items, loading }: DashboardProps) {
       <div className="animate-card-enter">
         <h1 className="text-3xl font-bold">{getGreeting()} 👋</h1>
         <p className="text-muted-foreground mt-1">
-          Track your progress across Azure architecture and competitive programming.
+          Track your progress across Azure architecture, C# mastery, and competitive programming.
         </p>
       </div>
 
@@ -87,7 +87,7 @@ export function Dashboard({ stats, items, loading }: DashboardProps) {
       </div>
 
       {/* Track Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <TrackCard
           trackId="azure"
           title="Azure & Cloud Architecture"
@@ -95,6 +95,14 @@ export function Dashboard({ stats, items, loading }: DashboardProps) {
           currentPhase={getCurrentPhase(items, 'azure')}
           onContinue={() => navigate('/plan/azure')}
           delay={300}
+        />
+        <TrackCard
+          trackId="csharp"
+          title="C# Language Mastery"
+          stats={safeStats.trackStats.csharp}
+          currentPhase={getCurrentPhase(items, 'csharp')}
+          onContinue={() => navigate('/plan/csharp')}
+          delay={350}
         />
         <TrackCard
           trackId="cp"

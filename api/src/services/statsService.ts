@@ -1,5 +1,5 @@
-import type { UserStats, PlanItem, Badge, TrackId } from '../types/plan.js';
-import { getUserStatsContainer, getPlanItemsContainer } from './cosmosClient.js';
+import type { UserStats, PlanItem, Badge, TrackId } from '../types/plan';
+import { getUserStatsContainer, getPlanItemsContainer } from './cosmosClient';
 
 function getWeekKey(date: Date = new Date()): string {
   const year = date.getFullYear();
@@ -34,6 +34,7 @@ export async function getOrCreateStats(userId: string): Promise<UserStats> {
     trackStats: {
       azure: { completed: 0, total: 0 },
       cp: { completed: 0, total: 0 },
+      csharp: { completed: 0, total: 0 },
     },
   };
 
@@ -56,6 +57,7 @@ export async function recalculateStats(userId: string): Promise<UserStats> {
   const trackStats: Record<TrackId, { completed: number; total: number }> = {
     azure: { completed: 0, total: 0 },
     cp: { completed: 0, total: 0 },
+    csharp: { completed: 0, total: 0 },
   };
 
   for (const item of items) {

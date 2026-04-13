@@ -1,7 +1,7 @@
 import { app, type HttpRequest, type HttpResponseInit, type InvocationContext } from '@azure/functions';
-import { getPlanItemsContainer } from '../services/cosmosClient.js';
-import { getAuthUser } from '../middleware/auth.js';
-import type { PlanItem } from '../types/plan.js';
+import { getPlanItemsContainer } from '../services/cosmosClient';
+import { getAuthUser } from '../middleware/auth';
+import type { PlanItem } from '../types/plan';
 
 async function getPlanItems(req: HttpRequest, _context: InvocationContext): Promise<HttpResponseInit> {
   const user = getAuthUser(req);

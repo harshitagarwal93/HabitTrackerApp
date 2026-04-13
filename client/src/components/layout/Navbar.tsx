@@ -13,6 +13,7 @@ const navLinks = [
   { to: '/', label: 'Dashboard' },
   { to: '/plan', label: 'All' },
   { to: '/plan/azure', label: 'Azure' },
+  { to: '/plan/csharp', label: 'C#' },
   { to: '/plan/cp', label: 'CP' },
 ];
 

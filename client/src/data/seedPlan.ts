@@ -694,6 +694,439 @@ const cpP4Topics = [
   }),
 ];
 
+// ── C# TRACK ──────────────────────────────────────────────
+
+const csharpTrack = item({
+  id: 'csharp-track',
+  trackId: 'csharp',
+  parentId: null,
+  type: 'track',
+  title: 'C# Language Mastery',
+  description: 'Deep dive into modern C# language features, .NET runtime internals, performance patterns, and advanced techniques. Go beyond basics to write expert-level C#.',
+  order: 3,
+  weekRange: '1-20',
+});
+
+// C# Phase 1
+const csharpPhase1 = item({
+  id: 'cs-p1',
+  trackId: 'csharp',
+  parentId: 'csharp-track',
+  type: 'phase',
+  title: 'Modern C# Language Features',
+  description: 'Master C# 10-12 features: records, pattern matching, global usings, file-scoped namespaces, raw string literals, and primary constructors.',
+  order: 1,
+  weekRange: '1-4',
+  resources: [
+    { title: 'What\'s new in C# 12', url: 'https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12', type: 'docs' },
+    { title: 'What\'s new in C# 11', url: 'https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11', type: 'docs' },
+    { title: 'C# in Depth, 4th Ed — Jon Skeet', url: 'https://csharpindepth.com/', type: 'book', notes: 'The definitive guide to understanding C# deeply' },
+    { title: 'Nick Chapsas — Modern C#', url: 'https://www.youtube.com/c/Nickchapsas', type: 'video', notes: 'Excellent deep dives on new C# features' },
+  ],
+});
+
+const csP1Topics = [
+  item({
+    id: 'cs-p1-t1', trackId: 'csharp', parentId: 'cs-p1', type: 'topic', order: 1,
+    title: 'Records, Structs & Value Types', weekRange: '1',
+    description: 'Records for immutable data, record structs for value-type records, readonly structs. When to choose each.',
+    resources: [
+      { title: 'Records overview', url: 'https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/types/records', type: 'docs' },
+    ],
+    architecturalNotes: [
+      'record class: reference type with value equality. Use for DTOs, API responses, domain events.',
+      'record struct: value type with value equality. Use for small, frequently allocated data (coords, ranges).',
+      'readonly struct: prevents mutation after construction. Use for performance-critical value types.',
+      'Decision: record class for most data carriers; record struct for hot-path small objects; class for entities with identity.',
+    ],
+    practiceItems: ['Refactor a DTO class to a record', 'Benchmark record vs class for allocation', 'Use with-expressions for immutable updates'],
+  }),
+  item({
+    id: 'cs-p1-t2', trackId: 'csharp', parentId: 'cs-p1', type: 'topic', order: 2,
+    title: 'Pattern Matching (Advanced)', weekRange: '1-2',
+    description: 'Switch expressions, property patterns, relational patterns, list patterns, and pattern combinators.',
+    resources: [
+      { title: 'Pattern matching overview', url: 'https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching', type: 'docs' },
+    ],
+    architecturalNotes: [
+      'Switch expressions replace verbose switch statements — more readable and exhaustive',
+      'Property patterns: match on object properties directly — great for validation and type discrimination',
+      'List patterns (C# 11): [first, .., last] — powerful for parsing and collection matching',
+      'Decision: use switch expressions for multi-branch logic; property patterns for validation; avoid over-nesting',
+    ],
+    practiceItems: ['Rewrite an if-else chain using switch expression with property patterns', 'Use list patterns to parse command-line arguments'],
+  }),
+  item({
+    id: 'cs-p1-t3', trackId: 'csharp', parentId: 'cs-p1', type: 'topic', order: 3,
+    title: 'Primary Constructors & Required Members', weekRange: '2-3',
+    description: 'C# 12 primary constructors for classes/structs, required keyword, init-only setters.',
+    resources: [
+      { title: 'Primary constructors', url: 'https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-12#primary-constructors', type: 'docs' },
+    ],
+    architecturalNotes: [
+      'Primary constructors: parameters available throughout class body — reduces boilerplate DI injection',
+      'Capture semantics: parameters are captured by the closure, not stored as fields (unless you assign them)',
+      'required modifier: forces callers to set a property — enforces contracts at compile time without constructor params',
+      'Decision: primary constructors for DI-heavy services; required for configuration DTOs',
+    ],
+    practiceItems: ['Convert a service class with constructor injection to primary constructor', 'Use required members on a config model'],
+  }),
+  item({
+    id: 'cs-p1-t4', trackId: 'csharp', parentId: 'cs-p1', type: 'topic', order: 4,
+    title: 'Raw Strings, Interpolation & String Handling', weekRange: '3',
+    description: 'Raw string literals, improved interpolation, UTF-8 string literals, SearchValues<T>.',
+    architecturalNotes: [
+      'Raw string literals (\"\"\"): no escaping needed for JSON, XML, regex — cleaner embedded content',
+      'UTF-8 string literals ("text"u8): avoids encoding overhead for HTTP headers, protocol buffers',
+      'SearchValues<T> (.NET 8): optimized character set searching — faster than Contains/IndexOfAny for known sets',
+    ],
+    practiceItems: ['Use raw string literals for embedded JSON/SQL templates', 'Benchmark SearchValues vs string.Contains'],
+  }),
+  item({
+    id: 'cs-p1-t5', trackId: 'csharp', parentId: 'cs-p1', type: 'topic', order: 5,
+    title: 'Collection Expressions & Spread', weekRange: '3-4',
+    description: 'C# 12 collection expressions ([]), spread operator (..), and collection builders.',
+    architecturalNotes: [
+      'Collection expressions: [1, 2, 3] creates arrays, lists, spans — replaces new[] { }, new List<> { }',
+      'Spread operator: [..existing, newItem] — combines collections without LINQ Concat',
+      'Works with custom types via CollectionBuilder attribute',
+      'Decision: use for all new collection initialization; cleaner than constructor syntax',
+    ],
+    practiceItems: ['Refactor array/list initializations to collection expressions', 'Combine multiple collections using spread'],
+  }),
+];
+
+// C# Phase 2
+const csharpPhase2 = item({
+  id: 'cs-p2',
+  trackId: 'csharp',
+  parentId: 'csharp-track',
+  type: 'phase',
+  title: 'Async, Concurrency & Threading',
+  description: 'Master async/await internals, Task-based programming, channels, parallel processing, and concurrency patterns.',
+  order: 2,
+  weekRange: '5-8',
+  resources: [
+    { title: 'Async in Depth', url: 'https://learn.microsoft.com/en-us/dotnet/standard/async-in-depth', type: 'docs' },
+    { title: 'Concurrency in C# Cookbook — Stephen Cleary', url: 'https://www.oreilly.com/library/view/concurrency-in-c/9781492054498/', type: 'book', notes: 'The go-to reference for async/parallel patterns' },
+    { title: 'Stephen Cleary\'s blog', url: 'https://blog.stephencleary.com/', type: 'blog', notes: 'Definitive async/await guidance' },
+  ],
+});
+
+const csP2Topics = [
+  item({
+    id: 'cs-p2-t1', trackId: 'csharp', parentId: 'cs-p2', type: 'topic', order: 1,
+    title: 'Async/Await Internals', weekRange: '5',
+    description: 'How the state machine works, SynchronizationContext, ConfigureAwait, ValueTask vs Task.',
+    architecturalNotes: [
+      'async/await compiles to a state machine — each await is a suspension point',
+      'ConfigureAwait(false): avoids capturing SynchronizationContext — use in library code, not in UI/controller code',
+      'ValueTask: avoids Task allocation when result is often synchronous (cache hits, buffered reads)',
+      'Decision: Task for most APIs; ValueTask only when profiling shows allocation pressure from completed tasks',
+    ],
+    practiceItems: ['Inspect generated state machine with ILSpy/SharpLab', 'Benchmark Task vs ValueTask for a cached operation'],
+  }),
+  item({
+    id: 'cs-p2-t2', trackId: 'csharp', parentId: 'cs-p2', type: 'topic', order: 2,
+    title: 'Cancellation, Timeouts & Error Handling', weekRange: '5-6',
+    description: 'CancellationToken patterns, timeout handling, exception aggregation in async code.',
+    architecturalNotes: [
+      'Always accept CancellationToken in public async methods — enables cooperative cancellation',
+      'CancellationTokenSource.CreateLinkedTokenSource: compose multiple cancellation signals',
+      'Timeout pattern: use CancellationTokenSource with TimeSpan, not Task.Delay + Task.WhenAny',
+      'AggregateException: unwrap in catch blocks — Task.Exception wraps inner exceptions',
+    ],
+    practiceItems: ['Add CancellationToken support to an HTTP client wrapper', 'Implement timeout with linked cancellation tokens'],
+  }),
+  item({
+    id: 'cs-p2-t3', trackId: 'csharp', parentId: 'cs-p2', type: 'topic', order: 3,
+    title: 'Channels & Producer-Consumer', weekRange: '6-7',
+    description: 'System.Threading.Channels for async producer-consumer patterns. Bounded vs unbounded channels.',
+    resources: [
+      { title: 'Channels overview', url: 'https://learn.microsoft.com/en-us/dotnet/core/extensions/channels', type: 'docs' },
+    ],
+    architecturalNotes: [
+      'Channel<T>: thread-safe async producer-consumer — replaces BlockingCollection in async code',
+      'BoundedChannel: applies backpressure when full — prevents OOM in high-throughput scenarios',
+      'UnboundedChannel: no limit — only use when producer rate is guaranteed < consumer rate',
+      'Decision: bounded channels for ingestion pipelines; unbounded for internal signaling between components',
+    ],
+    practiceItems: ['Build a background processing pipeline using channels', 'Compare Channel vs ConcurrentQueue performance'],
+  }),
+  item({
+    id: 'cs-p2-t4', trackId: 'csharp', parentId: 'cs-p2', type: 'topic', order: 4,
+    title: 'Parallel & PLINQ', weekRange: '7-8',
+    description: 'Parallel.ForEachAsync, PLINQ, Task.WhenAll patterns, SemaphoreSlim for throttling.',
+    architecturalNotes: [
+      'Parallel.ForEachAsync (.NET 6+): async-native parallel loop with MaxDegreeOfParallelism',
+      'PLINQ (.AsParallel()): best for CPU-bound operations on large collections — not for I/O',
+      'SemaphoreSlim: throttle concurrent async operations (e.g., limit to 10 HTTP calls at once)',
+      'Decision: Parallel.ForEachAsync for I/O-bound parallel work; PLINQ for CPU-bound collection processing',
+    ],
+    practiceItems: ['Implement throttled parallel HTTP calls with SemaphoreSlim', 'Compare Parallel.ForEachAsync vs manual Task.WhenAll batching'],
+  }),
+  item({
+    id: 'cs-p2-t5', trackId: 'csharp', parentId: 'cs-p2', type: 'topic', order: 5,
+    title: 'IAsyncEnumerable & Async Streams', weekRange: '8',
+    description: 'Async iteration with IAsyncEnumerable<T>, yield return in async methods, streaming data.',
+    architecturalNotes: [
+      'IAsyncEnumerable: pull-based async streaming — caller controls pace (vs push-based Channels)',
+      'Use for: paginated API results, database cursor reads, Server-Sent Events',
+      'await foreach: natural consumption syntax — compiles to async enumerator pattern',
+      'Decision: IAsyncEnumerable for lazy async sequences; Channel for producer-consumer with backpressure',
+    ],
+    practiceItems: ['Stream paginated API results as IAsyncEnumerable', 'Use in ASP.NET Core controller returning streaming JSON'],
+  }),
+];
+
+// C# Phase 3
+const csharpPhase3 = item({
+  id: 'cs-p3',
+  trackId: 'csharp',
+  parentId: 'csharp-track',
+  type: 'phase',
+  title: 'Performance & Memory',
+  description: 'Span<T>, Memory<T>, ArrayPool, object pooling, benchmarking, and allocation-free patterns.',
+  order: 3,
+  weekRange: '9-13',
+  resources: [
+    { title: 'Writing High-Performance .NET Code — Ben Watson', url: 'https://www.writinghighperf.net/', type: 'book' },
+    { title: 'Pro .NET Memory Management — Konrad Kokosa', url: 'https://prodotnetmemory.com/', type: 'book', notes: 'Deep GC and memory internals' },
+    { title: 'Adam Sitnik — performance blog', url: 'https://adamsitnik.com/', type: 'blog' },
+    { title: 'BenchmarkDotNet', url: 'https://benchmarkdotnet.org/', type: 'docs' },
+  ],
+});
+
+const csP3Topics = [
+  item({
+    id: 'cs-p3-t1', trackId: 'csharp', parentId: 'cs-p3', type: 'topic', order: 1,
+    title: 'Span<T> & Memory<T>', weekRange: '9',
+    description: 'Stack-allocated slicing with Span<T>, heap-safe Memory<T>, ReadOnlySpan. Zero-allocation parsing.',
+    architecturalNotes: [
+      'Span<T>: stack-only view over contiguous memory (arrays, strings, native memory). Zero allocation slicing.',
+      'Memory<T>: heap-safe wrapper when you need to store a ref to a slice (async methods, fields)',
+      'string.AsSpan(): parse without substring allocations — massive win for parsers and formatters',
+      'Decision: Span for synchronous hot paths (parsers, formatters); Memory when span needs to escape the stack',
+    ],
+    practiceItems: ['Parse CSV data using Span<char> without allocations', 'Compare string.Substring vs Span slicing with BenchmarkDotNet'],
+  }),
+  item({
+    id: 'cs-p3-t2', trackId: 'csharp', parentId: 'cs-p3', type: 'topic', order: 2,
+    title: 'ArrayPool & Object Pooling', weekRange: '9-10',
+    description: 'Rent/return arrays from ArrayPool. ObjectPool for expensive objects. Reduce GC pressure.',
+    resources: [
+      { title: 'ArrayPool<T> docs', url: 'https://learn.microsoft.com/en-us/dotnet/api/system.buffers.arraypool-1', type: 'docs' },
+    ],
+    architecturalNotes: [
+      'ArrayPool.Shared.Rent(): reuse arrays instead of allocating new ones — crucial for buffer-heavy code',
+      'Always return rented arrays in finally blocks — leaking causes pool exhaustion',
+      'ObjectPool<T>: reuse expensive objects (StringBuilder, HttpClient handlers, serializers)',
+      'Decision: ArrayPool for byte[]/char[] buffers; ObjectPool for complex initialization-heavy objects',
+    ],
+    practiceItems: ['Use ArrayPool for a file reader buffer', 'Measure GC collections before and after pooling'],
+  }),
+  item({
+    id: 'cs-p3-t3', trackId: 'csharp', parentId: 'cs-p3', type: 'topic', order: 3,
+    title: 'Benchmarking with BenchmarkDotNet', weekRange: '10-11',
+    description: 'Reliable micro-benchmarks, diagnosers (memory, GC, disassembly), result interpretation.',
+    architecturalNotes: [
+      'BenchmarkDotNet handles warmup, multiple iterations, and statistical analysis automatically',
+      'MemoryDiagnoser: shows allocations per operation — the #1 metric for hot path optimization',
+      'DisassemblyDiagnoser: see JIT-generated assembly — verify inlining, devirtualization',
+      'Beware: micro-benchmarks don\'t capture real workload characteristics — always profile production too',
+    ],
+    practiceItems: ['Benchmark three approaches to string concatenation', 'Use MemoryDiagnoser to compare record vs class allocation'],
+  }),
+  item({
+    id: 'cs-p3-t4', trackId: 'csharp', parentId: 'cs-p3', type: 'topic', order: 4,
+    title: 'GC Internals & Allocation Patterns', weekRange: '11-12',
+    description: 'Generational GC, LOH, POH, GC modes (workstation vs server), reducing allocations.',
+    architecturalNotes: [
+      'Gen0: short-lived objects. Gen1: survived one collection. Gen2: long-lived. LOH: >85KB objects.',
+      'Server GC: one heap per core, higher throughput. Workstation GC: single heap, lower latency.',
+      'POH (Pinned Object Heap): .NET 5+ — avoids LOH fragmentation for pinned buffers',
+      'Allocation-free patterns: stackalloc, Span, ArrayPool, struct tuples, cached delegates',
+    ],
+    practiceItems: ['Use dotnet-counters to monitor GC metrics live', 'Identify and eliminate Gen2 collections in a sample app'],
+  }),
+  item({
+    id: 'cs-p3-t5', trackId: 'csharp', parentId: 'cs-p3', type: 'topic', order: 5,
+    title: 'Source Generators & Compile-Time Code', weekRange: '12-13',
+    description: 'Roslyn source generators for zero-reflection patterns. JSON, logging, and regex source generators.',
+    resources: [
+      { title: 'Source generators overview', url: 'https://learn.microsoft.com/en-us/dotnet/csharp/roslyn-sdk/source-generators-overview', type: 'docs' },
+    ],
+    architecturalNotes: [
+      'Source generators: emit C# at compile time — replaces runtime reflection for serialization, DI, validation',
+      'System.Text.Json source gen: [JsonSerializable] — eliminates startup reflection cost, enables trimming',
+      'LoggerMessage source gen: [LoggerMessage] — allocation-free structured logging',
+      'GeneratedRegex: [GeneratedRegex] — compile-time regex compilation, much faster than Regex.Compile',
+      'Decision: prefer source-generated alternatives wherever available — faster startup, trimming-safe, AOT-compatible',
+    ],
+    practiceItems: ['Use [JsonSerializable] for a serialization context', 'Benchmark GeneratedRegex vs Regex.Compile'],
+  }),
+];
+
+// C# Phase 4
+const csharpPhase4 = item({
+  id: 'cs-p4',
+  trackId: 'csharp',
+  parentId: 'csharp-track',
+  type: 'phase',
+  title: 'LINQ, Generics & Type System Deep Dive',
+  description: 'Advanced LINQ, generic constraints, covariance/contravariance, expression trees, and reflection alternatives.',
+  order: 4,
+  weekRange: '14-17',
+  resources: [
+    { title: 'LINQ docs', url: 'https://learn.microsoft.com/en-us/dotnet/csharp/linq/', type: 'docs' },
+    { title: 'CLR via C# — Jeffrey Richter', url: 'https://www.microsoftpressstore.com/store/clr-via-c-sharp-9780735667457', type: 'book', notes: 'Foundational CLR and type system understanding' },
+  ],
+});
+
+const csP4Topics = [
+  item({
+    id: 'cs-p4-t1', trackId: 'csharp', parentId: 'cs-p4', type: 'topic', order: 1,
+    title: 'LINQ Internals & Performance', weekRange: '14',
+    description: 'Deferred execution, expression trees vs delegates, LINQ allocation costs, and optimized alternatives.',
+    architecturalNotes: [
+      'Deferred execution: LINQ queries don\'t execute until enumerated — beware multiple enumeration',
+      'LINQ allocates: each operator creates iterator objects. For hot paths, use manual loops.',
+      'IQueryable<T> uses expression trees (compiled at runtime) vs IEnumerable<T> uses delegates (in-memory)',
+      'Decision: LINQ for readability in business logic; manual loops in hot paths; IQueryable for database queries',
+    ],
+    practiceItems: ['Profile LINQ chain allocations vs manual loop', 'Convert an IQueryable query to raw SQL and compare'],
+  }),
+  item({
+    id: 'cs-p4-t2', trackId: 'csharp', parentId: 'cs-p4', type: 'topic', order: 2,
+    title: 'Generics Deep Dive', weekRange: '14-15',
+    description: 'Generic constraints, static abstract interface members, generic math, type erasure vs reification.',
+    resources: [
+      { title: 'Generic math', url: 'https://learn.microsoft.com/en-us/dotnet/standard/generics/math', type: 'docs' },
+    ],
+    architecturalNotes: [
+      'C# generics are reified (not erased like Java) — each closed type gets its own code at runtime',
+      'Static abstract interface members (.NET 7+): enable generic math — INumber<T>, IAdditionOperators<T,T,T>',
+      'where T : allows(IParsable<T>): constraint to parseable types — removes stringly-typed parsing',
+      'Decision: prefer generic interfaces over object + casting; use static abstracts for mathematical/parsing abstractions',
+    ],
+    practiceItems: ['Write a generic Sum<T>() using INumber<T>', 'Create a generic repository with proper constraints'],
+  }),
+  item({
+    id: 'cs-p4-t3', trackId: 'csharp', parentId: 'cs-p4', type: 'topic', order: 3,
+    title: 'Covariance, Contravariance & Variance', weekRange: '15-16',
+    description: 'Generic variance (in/out), IEnumerable<out T> vs IList<T>, delegate variance.',
+    architecturalNotes: [
+      'Covariance (out T): IEnumerable<Derived> assignable to IEnumerable<Base> — producer position only',
+      'Contravariance (in T): Action<Base> assignable to Action<Derived> — consumer position only',
+      'IList<T> is invariant because it both produces and consumes T',
+      'Delegate variance: Func<out TResult> is covariant; Action<in T> is contravariant',
+    ],
+    practiceItems: ['Design a covariant interface for a read-only repository', 'Create examples showing where invariance prevents bugs'],
+  }),
+  item({
+    id: 'cs-p4-t4', trackId: 'csharp', parentId: 'cs-p4', type: 'topic', order: 4,
+    title: 'Expression Trees & Reflection Alternatives', weekRange: '16-17',
+    description: 'Build lambda expressions at runtime, compiled expression trees, and source-gen reflection.',
+    architecturalNotes: [
+      'Expression trees: data structures representing code — used by LINQ providers (EF Core, Azure Cosmos)',
+      'Expression.Compile(): convert expression tree to executable delegate — cached, fast after first call',
+      'Reflection alternatives: source generators, Unsafe.As, compiled expressions — avoid System.Reflection in hot paths',
+      'Decision: expression trees for building dynamic queries; source generators for anything known at compile time',
+    ],
+    practiceItems: ['Build a dynamic filter expression tree for a query builder', 'Benchmark reflection vs compiled expression property access'],
+  }),
+];
+
+// C# Phase 5
+const csharpPhase5 = item({
+  id: 'cs-p5',
+  trackId: 'csharp',
+  parentId: 'csharp-track',
+  type: 'phase',
+  title: 'DI, Middleware & ASP.NET Core Internals',
+  description: 'Dependency injection lifetime management, middleware pipeline, minimal APIs, and ASP.NET Core request processing.',
+  order: 5,
+  weekRange: '17-20',
+  resources: [
+    { title: 'Dependency injection in .NET', url: 'https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection', type: 'docs' },
+    { title: 'ASP.NET Core fundamentals', url: 'https://learn.microsoft.com/en-us/aspnet/core/fundamentals/', type: 'docs' },
+    { title: 'Andrew Lock — .NET Escapades blog', url: 'https://andrewlock.net/', type: 'blog', notes: 'Deep ASP.NET Core internals articles' },
+  ],
+});
+
+const csP5Topics = [
+  item({
+    id: 'cs-p5-t1', trackId: 'csharp', parentId: 'cs-p5', type: 'topic', order: 1,
+    title: 'DI Lifetimes & Anti-Patterns', weekRange: '17',
+    description: 'Transient vs Scoped vs Singleton. Captive dependency problem, service locator anti-pattern.',
+    architecturalNotes: [
+      'Transient: new instance per request. Scoped: one per HTTP request. Singleton: one for app lifetime.',
+      'Captive dependency: Singleton holding a Scoped service — Scoped never gets disposed. .NET validates this in Development.',
+      'Service Locator anti-pattern: injecting IServiceProvider and resolving manually — hides dependencies, breaks testability',
+      'Decision: stateless services as Transient; DbContext/UoW as Scoped; caches/configuration as Singleton',
+    ],
+    practiceItems: ['Reproduce and fix a captive dependency bug', 'Refactor a service locator to constructor injection'],
+  }),
+  item({
+    id: 'cs-p5-t2', trackId: 'csharp', parentId: 'cs-p5', type: 'topic', order: 2,
+    title: 'Options Pattern & Configuration', weekRange: '17-18',
+    description: 'IOptions<T>, IOptionsSnapshot<T>, IOptionsMonitor<T>, validation, and named options.',
+    resources: [
+      { title: 'Options pattern', url: 'https://learn.microsoft.com/en-us/dotnet/core/extensions/options', type: 'docs' },
+    ],
+    architecturalNotes: [
+      'IOptions<T>: singleton, read once at startup. IOptionsSnapshot<T>: scoped, re-reads per request. IOptionsMonitor<T>: singleton, reacts to changes.',
+      'ValidateDataAnnotations / ValidateOnStart: fail fast if config is invalid — prevents runtime surprises',
+      'Named options: register multiple configurations of the same type (e.g., multiple HTTP client configs)',
+      'Decision: IOptions for static config; IOptionsMonitor for dynamic config (App Configuration, feature flags)',
+    ],
+    practiceItems: ['Add options validation with ValidateOnStart', 'Use IOptionsMonitor with Azure App Configuration'],
+  }),
+  item({
+    id: 'cs-p5-t3', trackId: 'csharp', parentId: 'cs-p5', type: 'topic', order: 3,
+    title: 'Middleware Pipeline & Request Processing', weekRange: '18-19',
+    description: 'How the ASP.NET Core middleware pipeline works, order of middleware, custom middleware.',
+    architecturalNotes: [
+      'Middleware is a pipeline of RequestDelegate — each middleware calls next() or short-circuits',
+      'Order matters: authentication before authorization, exception handling at the top, routing before endpoints',
+      'Terminal middleware: doesn\'t call next() — acts as the final handler (e.g., Map, Run)',
+      'Convention-based vs factory-based middleware: factory (IMiddleware) supports DI injection of scoped services',
+    ],
+    practiceItems: ['Write custom middleware for request timing/logging', 'Trace the full middleware pipeline for an API request'],
+  }),
+  item({
+    id: 'cs-p5-t4', trackId: 'csharp', parentId: 'cs-p5', type: 'topic', order: 4,
+    title: 'Minimal APIs & Endpoint Filters', weekRange: '19-20',
+    description: 'Minimal API design, endpoint filters, route groups, and comparison with controller-based APIs.',
+    resources: [
+      { title: 'Minimal APIs overview', url: 'https://learn.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis/overview', type: 'docs' },
+    ],
+    architecturalNotes: [
+      'Minimal APIs: less ceremony, no controller classes. Best for microservices and small APIs.',
+      'Endpoint filters (IEndpointFilter): AOP for endpoints — validation, logging, auth checks',
+      'Route groups: app.MapGroup("/api/v1") — organize endpoints with shared prefix, filters, metadata',
+      'Decision: minimal APIs for new microservices; controllers for large APIs with many cross-cutting concerns',
+    ],
+    practiceItems: ['Build a CRUD API using minimal APIs with endpoint filters for validation'],
+  }),
+  item({
+    id: 'cs-p5-t5', trackId: 'csharp', parentId: 'cs-p5', type: 'topic', order: 5,
+    title: 'Testing Patterns in C#', weekRange: '20',
+    description: 'xUnit, Moq/NSubstitute, FluentAssertions, integration testing with WebApplicationFactory.',
+    resources: [
+      { title: 'Integration testing in ASP.NET Core', url: 'https://learn.microsoft.com/en-us/aspnet/core/test/integration-tests', type: 'docs' },
+      { title: 'Unit testing best practices', url: 'https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices', type: 'docs' },
+    ],
+    architecturalNotes: [
+      'Arrange-Act-Assert: standard test structure. One assertion per test concept (not per assert call).',
+      'WebApplicationFactory: spins up in-memory API for integration tests — no deployment needed',
+      'Test doubles: Mock for verifying interactions; Stub for providing data; Fake for lightweight implementations',
+      'Decision: unit tests for business logic; integration tests for API endpoints and data access; avoid testing framework internals',
+    ],
+    practiceItems: ['Write integration tests using WebApplicationFactory', 'Compare Moq vs NSubstitute syntax for DI-heavy services'],
+  }),
+];
+
 // ── ASSEMBLE ALL ITEMS ──────────────────────────────────────
 
 export const seedPlanData: Omit<PlanItem, 'userId'>[] = [
@@ -703,6 +1136,12 @@ export const seedPlanData: Omit<PlanItem, 'userId'>[] = [
   azurePhase3, ...azureP3Topics,
   azurePhase4, ...azureP4Topics,
   azurePhase5, ...azureP5Topics,
+  csharpTrack,
+  csharpPhase1, ...csP1Topics,
+  csharpPhase2, ...csP2Topics,
+  csharpPhase3, ...csP3Topics,
+  csharpPhase4, ...csP4Topics,
+  csharpPhase5, ...csP5Topics,
   cpTrack,
   cpPhase1, ...cpP1Topics,
   cpPhase2, ...cpP2Topics,
