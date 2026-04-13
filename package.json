@@ -1,0 +1,14 @@
+{
+  "name": "prep-tracker-app",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "client",
+    "api"
+  ],
+  "scripts": {
+    "dev": "swa start http://localhost:5173 --api-location api",
+    "build": "npm run build --workspace=client",
+    "seed": "npx tsx scripts/seed.ts"
+  }
+}
