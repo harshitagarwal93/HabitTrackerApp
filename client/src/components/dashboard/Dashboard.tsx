@@ -38,8 +38,23 @@ export function Dashboard({ stats, items, loading }: DashboardProps) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-[60vh]">
-        <div className="animate-pulse text-muted-foreground">Loading your dashboard...</div>
+      <div className="max-w-7xl mx-auto space-y-8 px-8 py-6">
+        {/* Skeleton greeting */}
+        <div>
+          <div className="h-9 w-72 bg-muted rounded-lg animate-pulse" />
+          <div className="h-5 w-96 bg-muted/60 rounded mt-2 animate-pulse" />
+        </div>
+        {/* Skeleton streak + badges */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="h-48 bg-card border rounded-lg animate-pulse" />
+          <div className="h-48 bg-card border rounded-lg animate-pulse" />
+        </div>
+        {/* Skeleton track cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="h-36 bg-card border rounded-lg animate-pulse" style={{ animationDelay: `${i * 100}ms` }} />
+          ))}
+        </div>
       </div>
     );
   }

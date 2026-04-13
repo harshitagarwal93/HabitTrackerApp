@@ -14,7 +14,7 @@ interface TopicPanelProps {
 
 export function TopicPanel({ item, allItems, onStatusChange }: TopicPanelProps) {
   return (
-    <div className="h-full overflow-y-auto p-8 space-y-6">
+    <div key={item.id} className="h-full overflow-y-auto p-8 space-y-6 animate-card-enter">
       <div>
         <Breadcrumb item={item} allItems={allItems} className="mb-3" />
         <div className="flex items-start justify-between gap-4">

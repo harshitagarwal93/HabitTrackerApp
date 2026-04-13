@@ -40,7 +40,7 @@ export default function App() {
   useEffect(() => { loadData(); }, [loadData]);
 
   const handleStatusChange = async (id: string, status: Status) => {
-    // Optimistic update
+    // Optimistic update — instant UI response
     setItems(prev =>
       prev.map(item =>
         item.id === id
@@ -52,7 +52,8 @@ export default function App() {
     try {
       const result = await api.updateItemStatus(id, status) as PlanItem & { _newBadges?: Array<{ icon: string; name: string; description: string }> };
       setItems(prev => prev.map(item => (item.id === id ? result : item)));
-      // Refresh stats after status change
+
+      // Refresh stats in background
       const { stats: newStats } = await api.init();
       setStats(newStats);
 
@@ -62,7 +63,7 @@ export default function App() {
         }
       }
     } catch {
-      loadData(); // revert on error
+      loadData();
     }
   };
 
