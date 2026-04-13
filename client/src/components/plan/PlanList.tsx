@@ -28,13 +28,13 @@ export function PlanList({ items, selectedId, onSelect }: PlanListProps) {
 
         return (
           <div key={phase.id}>
-            <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm px-2 py-2 border-b">
+            <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm px-4 py-2.5 border-b">
               <h3 className="text-sm font-semibold text-muted-foreground">
                 {phase.title}
                 {phase.weekRange && <span className="ml-2 text-xs font-normal">W{phase.weekRange}</span>}
               </h3>
             </div>
-            <div className="space-y-2 p-2">
+            <div className="space-y-2 p-3">
               {topics.map(topic => (
                 <PlanListCard
                   key={topic.id}

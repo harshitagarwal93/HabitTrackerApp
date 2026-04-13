@@ -65,18 +65,18 @@ export function PlanView({ items, onStatusChange }: PlanViewProps) {
   return (
     <div className="flex h-[calc(100vh-64px)]">
       {/* Left panel — tree/list */}
-      <div className="w-[420px] shrink-0 border-r flex flex-col">
+      <div className="w-[380px] min-w-[320px] max-w-[480px] shrink-0 border-r flex flex-col">
         {/* Toolbar */}
-        <div className="p-3 border-b space-y-3">
+        <div className="p-4 border-b space-y-3">
           <div className="flex items-center gap-2">
             <div className="relative flex-1">
-              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
                 placeholder="Search topics..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="w-full pl-8 pr-3 py-1.5 text-sm rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full pl-9 pr-3 py-2 text-sm rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
               />
             </div>
             <div className="flex rounded-md border">
@@ -129,8 +129,9 @@ export function PlanView({ items, onStatusChange }: PlanViewProps) {
         ) : (
           <div className="flex items-center justify-center h-full text-muted-foreground">
             <div className="text-center">
-              <div className="text-4xl mb-3">📚</div>
-              <p>Select a topic to view details</p>
+              <div className="text-5xl mb-4">📚</div>
+              <p className="text-lg">Select a topic to view details</p>
+              <p className="text-sm mt-1">Choose from the list on the left</p>
             </div>
           </div>
         )}

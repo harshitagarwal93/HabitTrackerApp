@@ -22,10 +22,10 @@ export function TreeNodeItem({ node, depth = 0, selectedId, onSelect }: TreeNode
     <div>
       <div
         className={cn(
-          'flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer transition-colors text-sm',
+          'flex items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors text-sm',
           isSelected ? 'bg-accent' : 'hover:bg-accent/50',
         )}
-        style={{ paddingLeft: `${depth * 16 + 8}px` }}
+        style={{ paddingLeft: `${depth * 20 + 12}px` }}
         onClick={() => {
           onSelect(node);
           if (hasChildren) setExpanded(!expanded);

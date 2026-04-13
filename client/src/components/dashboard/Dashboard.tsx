@@ -57,7 +57,7 @@ export function Dashboard({ stats, items, loading }: DashboardProps) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 p-6">
+    <div className="max-w-7xl mx-auto space-y-8 px-8 py-6">
       {/* Hero */}
       <div className="animate-card-enter">
         <h1 className="text-3xl font-bold">{getGreeting()} 👋</h1>

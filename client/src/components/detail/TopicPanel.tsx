@@ -14,19 +14,23 @@ interface TopicPanelProps {
 
 export function TopicPanel({ item, allItems, onStatusChange }: TopicPanelProps) {
   return (
-    <div className="h-full overflow-y-auto p-6 space-y-6">
+    <div className="h-full overflow-y-auto p-8 space-y-6">
       <div>
-        <Breadcrumb item={item} allItems={allItems} className="mb-2" />
-        <h2 className="text-xl font-bold">{item.title}</h2>
-        {item.weekRange && (
-          <span className="text-xs text-muted-foreground">Weeks {item.weekRange}</span>
-        )}
+        <Breadcrumb item={item} allItems={allItems} className="mb-3" />
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="text-2xl font-bold">{item.title}</h2>
+            {item.weekRange && (
+              <span className="text-sm text-muted-foreground mt-1 block">Weeks {item.weekRange}</span>
+            )}
+          </div>
+          <StatusSelector
+            value={item.status}
+            onChange={(status) => onStatusChange(item.id, status)}
+            className="shrink-0 mt-1"
+          />
+        </div>
       </div>
-
-      <StatusSelector
-        value={item.status}
-        onChange={(status) => onStatusChange(item.id, status)}
-      />
 
       {item.description && (
         <div className="prose prose-sm dark:prose-invert max-w-none text-foreground/90">
@@ -36,8 +40,8 @@ export function TopicPanel({ item, allItems, onStatusChange }: TopicPanelProps) 
 
       {item.resources.length > 0 && (
         <div>
-          <h4 className="text-sm font-semibold mb-3 text-muted-foreground">Resources</h4>
-          <div className="space-y-2">
+          <h4 className="text-sm font-semibold mb-3 text-muted-foreground uppercase tracking-wider">Resources</h4>
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
             {item.resources.map((res, i) => (
               <ResourceCard key={i} resource={res} />
             ))}

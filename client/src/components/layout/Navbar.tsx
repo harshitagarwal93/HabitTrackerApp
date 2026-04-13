@@ -22,7 +22,7 @@ export function Navbar({ isDark, onToggleTheme, userName }: NavbarProps) {
 
   return (
     <header className="h-16 border-b bg-card/80 backdrop-blur-sm sticky top-0 z-50">
-      <div className="flex items-center justify-between h-full px-4 max-w-screen-2xl mx-auto">
+      <div className="flex items-center justify-between h-full px-6">
         <div className="flex items-center gap-6">
           <Link to="/" className="flex items-center gap-2">
             <span className="text-xl">🎯</span>

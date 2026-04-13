@@ -21,13 +21,13 @@ export function PracticeChecklist({ items }: PracticeChecklistProps) {
 
   return (
     <div>
-      <h4 className="text-sm font-semibold mb-2 text-muted-foreground">Practice Items</h4>
-      <div className="space-y-1.5">
+      <h4 className="text-sm font-semibold mb-3 text-muted-foreground uppercase tracking-wider">Practice Items</h4>
+      <div className="space-y-1">
         {items.map((item, i) => (
           <button
             key={i}
             onClick={() => toggle(i)}
-            className="flex items-start gap-2 text-sm text-left w-full hover:bg-accent/30 rounded-md p-1.5 transition-colors cursor-pointer"
+            className="flex items-start gap-3 text-sm text-left w-full hover:bg-accent/30 rounded-md px-3 py-2 transition-colors cursor-pointer"
           >
             {checked.has(i) ? (
               <CheckSquare className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
